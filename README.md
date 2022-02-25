@@ -17,3 +17,14 @@ EBNF syntax of request and response in the Key-Protocol:
 <contents>      ::= "yes"
                 |   "not"
                 |   "error"
+```
+
+Example request:
+```
+key_in-get{test};
+```
+
+Example respond:
+```
+key_out-{test:yes};
+```
