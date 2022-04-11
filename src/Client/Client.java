@@ -1,3 +1,5 @@
+package Client;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -6,13 +8,13 @@ import java.util.Scanner;
 
 public class Client {
 
-    private static void closeConnection(DataInputStream in, DataOutputStream out, Socket socket) throws IOException {
+    private void closeConnection(DataInputStream in, DataOutputStream out, Socket socket) throws IOException {
         in.close();
         out.close();
         socket.close();
     }
 
-    public static void main(String[] args) throws IOException {
+    public void start() throws IOException {
         System.out.println("Waiting for connection...");
         Socket socket = null;
         boolean connected = false;

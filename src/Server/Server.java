@@ -1,3 +1,5 @@
+package Server;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,10 +11,10 @@ import java.util.regex.Pattern;
 
 public class Server {
 
-    private static final ArrayList<String> keys = new ArrayList<>(); //baza kluczy
-    private static final String password = "haslo"; //hasło może zawierać znaki, cyfry i podkreślenie
+    private final ArrayList<String> keys = new ArrayList<>(); //baza kluczy
+    private final String password = "haslo"; //hasło może zawierać znaki, cyfry i podkreślenie
 
-    private static String processMessage(String clientmsg){
+    private String processMessage(String clientmsg){
         String servermsg;
         Pattern pattern = Pattern.compile("key_in-(get|set)\\{(\\w*):?(\\w*)};");
         Matcher matcher = pattern.matcher(clientmsg);
@@ -38,15 +40,15 @@ public class Server {
         return servermsg;
     }
 
-    private static void closeConnection(DataInputStream in, DataOutputStream out,
-                                        Socket socket, ServerSocket serverSocket) throws IOException {
+    private void closeConnection(DataInputStream in, DataOutputStream out,
+                                 Socket socket, ServerSocket serverSocket) throws IOException {
         in.close();
         out.close();
         socket.close();
         serverSocket.close();
     }
 
-    public static void main(String[] args) throws IOException {
+    public void start() throws IOException {
         keys.add("test"); //testowy klucz
         String clientmsg = "", servermsg; //wiadomość od klienta do serwera, wiadomość od serwera do klienta
         ServerSocket ss = new ServerSocket(2011);
